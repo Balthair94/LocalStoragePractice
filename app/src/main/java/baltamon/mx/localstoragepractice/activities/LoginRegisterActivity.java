@@ -18,6 +18,7 @@ import baltamon.mx.localstoragepractice.R;
 public class LoginRegisterActivity extends AppCompatActivity {
 
     private Button mButtonLogin;
+    private Button mButtonRegister;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,11 +32,20 @@ public class LoginRegisterActivity extends AppCompatActivity {
 
     private void variablesDeclaration() {
         mButtonLogin = (Button) findViewById(R.id.btnLogin);
+        mButtonRegister = (Button) findViewById(R.id.btnRegister);
 
         mButtonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LoginRegisterActivity.this, LoginActivity.class));
+                finish();
+            }
+        });
+
+        mButtonRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginRegisterActivity.this, RegisterActivity.class));
                 finish();
             }
         });
