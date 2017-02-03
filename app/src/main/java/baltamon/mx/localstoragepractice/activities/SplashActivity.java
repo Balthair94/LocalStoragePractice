@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import baltamon.mx.localstoragepractice.MainActivity;
 import baltamon.mx.localstoragepractice.R;
+import baltamon.mx.localstoragepractice.persistence.UserSession;
 
 /**
  * Created by Baltazar Rodriguez on 01/02/2017.
@@ -23,9 +24,19 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(SplashActivity.this, LoginRegisterActivity.class);
-                startActivity(intent);
-                finish();
+
+                UserSession userSession = new UserSession(getApplicationContext());
+
+                if (userSession.isLogged()){
+                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Intent intent = new Intent(SplashActivity.this, LoginRegisterActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+
             }
         }, 3000);
 
