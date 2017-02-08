@@ -2,6 +2,9 @@ package baltamon.mx.localstoragepractice;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
+
+import baltamon.mx.localstoragepractice.persistence.UserSession;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -9,6 +12,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        UserSession userSession = new UserSession(this);
+
+        TextView textView =  (TextView) findViewById(R.id.tvUserName);
+        textView.setText(userSession.getUserName());
     }
 
 }
