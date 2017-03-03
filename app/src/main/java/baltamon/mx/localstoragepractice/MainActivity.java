@@ -1,6 +1,7 @@
 package baltamon.mx.localstoragepractice;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -9,19 +10,23 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import baltamon.mx.localstoragepractice.activities.LoginRegisterActivity;
+import baltamon.mx.localstoragepractice.database.FriendsSQLiteHelper;
 import baltamon.mx.localstoragepractice.persistence.UserSession;
 
 public class MainActivity extends AppCompatActivity {
 
     private UserSession userSession;
+    private SQLiteDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setUpToolbar();
+        setUpDataBase();
 
         userSession = new UserSession(this);
 
@@ -54,4 +59,19 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void setUpDataBase(){
+        FriendsSQLiteHelper helper = new FriendsSQLiteHelper(this, "db_my_database", null, 1);
+        database = helper.getWritableDatabase();
+
+        if (database != null)
+            Toast.makeText(this, "DataBase OPEN", Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(this, "DataBase NULL", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        database.close();
+    }
 }
