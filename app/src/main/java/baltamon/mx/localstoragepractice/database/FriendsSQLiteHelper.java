@@ -13,7 +13,7 @@ public class FriendsSQLiteHelper extends SQLiteOpenHelper {
 
     //CREATE TABLE
     String sqlCreate = "CREATE TABLE Friends (" +
-            "ID INTEGER AUTOINCREMENT PRIMARY KEY," +
+            "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
             "FIRST_NAME TEXT NOT NULL," +
             "LAST_NAME TEXT NOT NULL," +
             "EMAIL TEXT NOT NULL," +
